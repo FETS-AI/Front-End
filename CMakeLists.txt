@@ -13,7 +13,7 @@ SET( ${PROJECT_NAME}_Variant "Full" ) # the particular variant of CaPTk (Full/Ne
 
 SET( PROJECT_VERSION_MAJOR 0 )
 SET( PROJECT_VERSION_MINOR 0 )
-SET( PROJECT_VERSION_PATCH 7 )
+SET( PROJECT_VERSION_PATCH 8-dev )
 SET( PROJECT_VERSION_TWEAK )
 
 # check for the string "nonRelease" in the PROJECT_VERSION_PATCH variable
@@ -559,6 +559,14 @@ IF( NOT BUILD_DOCUMENTATION_ONLY )
     RESULT_VARIABLE git_result
     OUTPUT_VARIABLE git_ver)    
   ENDIF()
+
+  # get lfs to pull
+  IF( EXISTS "${PROJECT_SOURCE_DIR}/BrainMaGe" )
+    EXECUTE_PROCESS(COMMAND git lfs pull
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/BrainMaGe
+    RESULT_VARIABLE git_result
+    OUTPUT_VARIABLE git_ver)  
+  ENDIF()  
   
   # copy plans from algorithms 
   IF( EXISTS "${PROJECT_SOURCE_DIR}/OpenFederatedLearning/submodules/fets_ai/Algorithms/fets/bin/federations/plans/pt_3dresunet_brainmagebrats.yaml" )
@@ -635,6 +643,13 @@ IF( NOT BUILD_DOCUMENTATION_ONLY )
 
   INSTALL(
     DIRECTORY "${PROJECT_SOURCE_DIR}/LabelFusion" 
+    DESTINATION bin
+    PATTERN ".git" EXCLUDE
+    PATTERN "venv" EXCLUDE
+  )
+
+  INSTALL(
+    DIRECTORY "${PROJECT_SOURCE_DIR}/BrainMaGe" 
     DESTINATION bin
     PATTERN ".git" EXCLUDE
     PATTERN "venv" EXCLUDE

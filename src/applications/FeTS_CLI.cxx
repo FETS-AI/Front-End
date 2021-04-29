@@ -418,7 +418,7 @@ int main(int argc, char** argv)
     if (!cbica::fileExists(split_info_val))
     {
       auto full_plan_path = hardcodedOpenFLPath + hardcodedPlanName;
-      auto command_to_run = hardcodedPythonPath + " " + hardcodedOpenFLPath + "submodules/Algorithms/fets_ai/bin/initialize_split_info.py -pp " + full_plan_path + " -dp " + dataDir;
+      auto command_to_run = hardcodedPythonPath + " " + hardcodedOpenFLPath + "submodules/fets_ai/Algorithms/fets/bin/initialize_split_info.py -pp " + full_plan_path + " -dp " + dataDir;
       if (std::system(command_to_run.c_str()) != 0)
       {
         std::cerr << "Initialize split did not work, continuing with validation.\n";

@@ -137,6 +137,9 @@ install_captk () {
   if make install_openfl ; then
     ./venv/bin/pip install torch==1.7.1+cu92 torchvision==0.8.2+cu92 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
     make install_fets
+    echo "Installing BrainMaGe..."
+    ./venv/bin/pip install ../BrainMaGe
+
     cd ../LabelFusion
     echo "Setting up the Python environment for LabelFusion (this needs SimpleITK==2.0.2, but GaNDLF needs 1.2.4)..."
     python3 -m venv venv
